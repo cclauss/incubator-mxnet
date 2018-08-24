@@ -153,7 +153,7 @@ def %s(%s):"""%(func_name, ', '.join(signature)))
     return ''.join(code), doc_str
 
 
-# pylint: disable=too-many-locals, invalid-name
+# pylint: disable=invalid-name
 def _make_ndarray_function(handle, name, func_name):
     """Create a NDArray function from the FunctionHandle."""
     code, doc_str = _generate_ndarray_function_code(handle, name, func_name)

@@ -17,7 +17,7 @@
 
 # coding: utf-8
 # pylint: disable=invalid-name, protected-access, too-many-arguments, too-many-lines
-# pylint: disable=import-error, no-name-in-module
+# pylint: disable=import-error, no-name-in-module, too-many-locals
 """Symbolic configuration API of MXNet."""
 from __future__ import absolute_import as _abs
 try:
@@ -882,7 +882,6 @@ class Symbol(SymbolBase):
             List of auxiliary state types.
             The order is same as the order of list_auxiliary_states().
         """
-        # pylint: disable=too-many-locals
         if len(args) != 0 and len(kwargs) != 0:
             raise ValueError('Can only specify known argument \
                     types either by positional or kwargs way.')
@@ -934,7 +933,6 @@ class Symbol(SymbolBase):
             return (arg_types, out_types, aux_types)
         else:
             return (None, None, None)
-            # pylint: enable=too-many-locals
 
     def infer_shape(self, *args, **kwargs):
         """Infers the shapes of all arguments and all outputs given the known shapes of
@@ -1069,7 +1067,6 @@ class Symbol(SymbolBase):
 
     def _infer_shape_impl(self, partial, *args, **kwargs):
         """The actual implementation for calling shape inference API."""
-        # pylint: disable=too-many-locals
         if len(args) != 0 and len(kwargs) != 0:
             raise ValueError('Can only specify known argument \
                     shapes either by positional or kwargs way.')
@@ -1134,7 +1131,6 @@ class Symbol(SymbolBase):
             return (arg_shapes, out_shapes, aux_shapes)
         else:
             return (None, None, None)
-        # pylint: enable=too-many-locals
 
     def debug_str(self):
         """Gets a debug string of symbol.
@@ -1285,7 +1281,6 @@ class Symbol(SymbolBase):
             raise TypeError('Only accept list of NDArrays or dict of str to NDArray')
         return c_array(NDArrayHandle, arg_handles), arg_arrays
 
-    # pylint: disable=too-many-locals
     def simple_bind(self, ctx, grad_req='write', type_dict=None, stype_dict=None,
                     group2ctx=None, shared_arg_names=None, shared_exec=None,
                     shared_buffer=None, **kwargs):
@@ -1639,7 +1634,7 @@ class Symbol(SymbolBase):
         One can give up gradient by using a dict in `args_grad` and only specify
         gradient they interested in.
         """
-        # pylint: disable=too-many-locals, too-many-branches
+        # pylint: disable=too-many-branches
         if not isinstance(ctx, Context):
             raise TypeError("Context type error")
 
